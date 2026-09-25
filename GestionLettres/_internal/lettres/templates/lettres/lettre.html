@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <title>Lettre de change</title>
+</head>
+
+<body>
+
+    <h1>La lettre de change</h1>
+
+    <p>
+        Connecté :
+        {{ request.user.username }}
+    </p>
+
+    <a href="{% url 'logout' %}">
+        Déconnexion
+    </a>
+
+    <hr>
+
+    <h2>
+        Nouvelle lettre de change
+    </h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Enregistrer
+        </button>
+
+    </form>
+
+
+    {% if derniere_lettre %}
+
+        <hr>
+
+        <h2>Dernière lettre</h2>
+
+        <p>
+            Numéro :
+            {{ derniere_lettre.numero }}
+        </p>
+
+        <p>
+            Montant :
+            {{ derniere_lettre.montant }} TND
+        </p>
+
+        <p>
+            Tireur :
+            {{ derniere_lettre.tireur }}
+        </p>
+
+        <p>
+            Tiré :
+            {{ derniere_lettre.tire }}
+        </p>
+
+        <p>
+            Bénéficiaire :
+            {{ derniere_lettre.beneficiaire }}
+        </p>
+
+        <p>
+            Échéance :
+            {{ derniere_lettre.date_echeance }}
+        </p>
+
+        <a href="{% url 'pdf' derniere_lettre.id %}">
+            Télécharger PDF
+        </a>
+
+    {% endif %}
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

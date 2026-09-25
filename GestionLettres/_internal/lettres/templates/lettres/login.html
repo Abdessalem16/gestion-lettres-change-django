@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Connexion</title>
+</head>
+<body>
+    <h1>Connexion</h1>
+    {% if error %}
+    <p> {{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username</label>
+        <input type ="text" name="username">
+        <br>
+        <br>
+        <label > Password</label>
+        <input type="text" name="password">
+        <br>
+        <br>
+        <button type="submit"> se connecter</button>
+    </form>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
